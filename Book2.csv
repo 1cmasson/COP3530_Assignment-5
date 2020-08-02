@@ -1,0 +1,7 @@
+Rounds,My House,Parents,Brother,Aunt,Uncle,Grandfather
+My House,0,3,5,12,10,22
+Parents,3,0,1,4,6,11
+Brother,5,1,0,5,4,9
+Aunt,12,4,5,0,7,5
+Uncle,10,6,4,7,0,10
+Grandfather,22,11,9,5,10,0
