@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		Scanner br = new Scanner(new File("Book1.csv"));
+		Scanner br = new Scanner(new File("exchangerates.csv"));
 		
 		List<String[]> rawData = new ArrayList<String[]>();
 		
@@ -45,8 +45,7 @@ public class Main {
 		
 		for(int row = 0; row < rates[0].length; row++) {
 			for(int column = 0; column < rates[0].length; column++) {
-				weight[row][column] =1;
-				weight[row][column] =  Math.log10(rates[row][column]) * -1;
+				weight[row][column] -=  Math.log(rates[row][column]) ;
 				//System.out.println( weight[row][column]);
 				
 			}
@@ -59,9 +58,21 @@ public class Main {
 		//System.out.println( rates[2][3] + " 1 - log(5) = 0.3010299 : " + weight[2][3]);
 		//System.out.println( rates[0][3] + " 1 - log(12) = -07918124 : " + weight[0][3]);
 		
-		/* Scanner sc= new Scanner(System.in);  */   
+		 Scanner sc= new Scanner(System.in);     
+		//System.out.println(currencyNames.get(41));
 		
-		bellmanFord(currencyNames,rates,weight, 1);
+		for(int i =0; i < currencyNames.size(); i++) {
+		
+			System.out.println((i+1) + " : " + currencyNames.get(i));
+		}
+	
+		System.out.print("\nSelect a number based on currency of choice: ");
+	
+		int choice = sc.nextInt();
+	
+		System.out.println("\nYour choice was " + currencyNames.get(choice-1) + "\n");
+		
+		bellmanFord(currencyNames,rates,weight, choice-1);
 		
 		
 	}
@@ -80,14 +91,18 @@ public class Main {
 				for(int destination = 0; destination < currencies.size(); destination++) {
 					if(dist[destination] > dist[src] + weights[src][destination]) {
 						dist[destination] = dist[src] + weights[src][destination];
+						
 					}
 				}
 				
 			}
-			System.out.println(dist[n]);
 		}
 		
-		
+		for(int n = 0; n < currencies.size(); n++) {
+			dist[n] = Math.exp(-dist[n]);
+			System.out.println(currencies.get(n)+ ": max Exchange Rate is "+dist[n] +", and direct rate is " + rates[source][n]);
+			
+		}
 		
 		
 	}
@@ -95,16 +110,7 @@ public class Main {
 	
 	
 ///////////////////THIS IS TRASH/////////////////////////////////////////////	
-//	for(int i =0; i < currencyNames.size(); i++) {
-//		
-//		System.out.println((i+1) + " : " + currencyNames.get(i));
-//	}
-//	
-//	System.out.print("\nSelect a number based on currency of choice: ");
-//	
-//	int choice = sc.nextInt();
-//	
-//	System.out.println("\nYour choice was " + currencyNames.get(choice-1) + "\n");
+
 //	
 //	for(int i = 0; i < rates[0].length; i++) {
 //		System.out.println(currencyNames.get(i)+ " max Exchange Rate is: "+ rates[2][i] +", and direct rate is: " + rates[3][i]);
