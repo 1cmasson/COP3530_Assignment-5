@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		Scanner br = new Scanner(new File("Book2.csv"));
+		Scanner br = new Scanner(new File("Book1.csv"));
 		
 		List<String[]> rawData = new ArrayList<String[]>();
 		
@@ -31,22 +31,23 @@ public class Main {
 			currencyNames.add(rawData.get(0)[i]);
 		}
 		
-		float rates [][] = new float [rawData.get(1).length-1][rawData.get(1).length-1];
+		double rates [][] = new double [rawData.get(1).length-1][rawData.get(1).length-1];
 		
 		for(int row = 1; row < rawData.size(); row++) {
 			for(int column = 1; column < rawData.get(1).length; column++) {
-				float rate = Float.parseFloat(rawData.get(row)[column]);
+				double rate = Double.parseDouble(rawData.get(row)[column]);
 				rates[row-1][column-1] = rate ;
 				
 			}
 		}
 		
-		float weight[][] = new float[rates[0].length][rates[0].length];
+		double weight[][] = new double[rates[0].length][rates[0].length];
 		
 		for(int row = 0; row < rates[0].length; row++) {
 			for(int column = 0; column < rates[0].length; column++) {
-				weight[row][column] = 1;
-				weight[row][column] -= Math.log10(rates[row][column]);
+				weight[row][column] =1;
+				weight[row][column] =  Math.log10(rates[row][column]) * -1;
+				//System.out.println( weight[row][column]);
 				
 			}
 		}
@@ -65,28 +66,28 @@ public class Main {
 		
 	}
 	
-	static void bellmanFord(ArrayList<String> currencies, float rates[][],float [][]weights, int source){
-		float dist[] = new float [currencies.size()+1];
+	static void bellmanFord(ArrayList<String> currencies, double rates[][], double[][] weights, int source){
+		double dist[] = new double [currencies.size()+1];
 		
 		for(int i = 0; i < currencies.size(); i++) {
 			dist[i] = Integer.MAX_VALUE;
 		}
 		
 		dist[source] = 0; 
-		int u = 0 , v = 0;
-		for(int i = 0 , k =1; i < currencies.size() && k < currencies.size(); i++, k++){
-			u++;
-			dist[u] = rates[i][0];
-			
-			System.out.print("Source: " + dist[u] + "\tDestination: ");
-			for(int j = 0 ; j < currencies.size(); j++ ){
-				
-				dist[v]= rates[j][k];
-				System.out.print( dist[v] + " | ");
+		
+		for(int n = 0; n < currencies.size(); n++) {
+			for(int src = 0; src < currencies.size(); src++) {
+				for(int destination = 0; destination < currencies.size(); destination++) {
+					if(dist[destination] > dist[src] + weights[src][destination]) {
+						dist[destination] = dist[src] + weights[src][destination];
+					}
+				}
 				
 			}
-			System.out.print("\n");
+			System.out.println(dist[n]);
 		}
+		
+		
 		
 		
 	}
