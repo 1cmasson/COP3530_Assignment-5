@@ -2,9 +2,11 @@
 This assignment asks you to use Bellman-Ford Algorithm to ﬁnd the most proﬁtable exchange sequence between currencies of diﬀerent countries.
 
 1 Input File 
+
 The input ﬁle “exchange rates.csv” which is available on Canvas contains a 54×54 table showing the exchange rates between diﬀerent currencies; e.g. the number stored at the ﬁrst row and ﬁfth column shows that one “Kuwaiti Dinar” can be exchanged by 2.802691797 “Euros” and the number stored at the ﬁfth row and ﬁrst column shows that one Euro can be exchanged by 0.349864239 Kuwaiti Dinar. Obviously, the numbers at the main diagonal of this table are all ones (one USD = one USD or one Euro = one Euro).
 
 2 Modeling the Problem to a Single-Source Shortest Path Problem
+
 The problem of ﬁnding the most proﬁtable exchange sequence from a source currency to all other currencies can be modeled to a shortest path problem with the following parameters:
 
  Graph vertices are the currencies (each currency is represented by a vertex of the graph). There are 54 vertices.
@@ -18,6 +20,7 @@ The problem of ﬁnding the most proﬁtable exchange sequence from a source cur
  the shortest path between any two vertices u and v represents the most proﬁtable exchange sequence between the currencies representing u and v; e.g. if u → x → w → v is the shortest path from u to v, then the most proﬁtable exchange sequence from 1 currency U to currency V will be to convert currency U to currency X, then covert X to W, and then convert W to V .
 
 3 Solving the Problem using Bellman-Ford Algorithm
+
 Bellman-Ford is a very simple algorithm to implement and it solves the shortest path problem given a source in a graph with both negative and positive weights. In this assignment, you need to write a Java program that gets a currency as the source currency from keyboard and ﬁnds the rates of most-proﬁtable exchange sequence from the source currency to all other currencies and compare the rates with the direct exchange rates; e.g. if the source currency is “Japanese Yen”, your program must print out the following statements: 
 
 Source currency is Japanese Yen
