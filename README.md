@@ -1,5 +1,7 @@
 Check out these links for better understanding:
+
 https://www.youtube.com/watch?v=obWXjtg0L64
+
 https://medium.com/@anilpai/currency-arbitrage-using-bellman-ford-algorithm-8938dcea56ea
 
 
