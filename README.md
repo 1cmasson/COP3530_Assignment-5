@@ -1,3 +1,8 @@
+Check out these links for better understanding:
+https://www.youtube.com/watch?v=obWXjtg0L64
+https://medium.com/@anilpai/currency-arbitrage-using-bellman-ford-algorithm-8938dcea56ea
+
+
 # COP3530_Assignment-5
 This assignment asks you to use Bellman-Ford Algorithm to ﬁnd the most proﬁtable exchange sequence between currencies of diﬀerent countries.
 
